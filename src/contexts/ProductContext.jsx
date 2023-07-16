@@ -8,9 +8,9 @@ const ProductProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const data = await (await fetch("https://fakestoreapi.com/products")).json();
+      const response = await (await fetch("https://fakestoreapi.com/products")).json();
+      const data = response.filter((item) => item.category === "men's clothing" || item.category === "women's clothing")
       data.forEach((item) =>(item.price = item.price*517))
-      
       setProducts(data)
     };
     fetchProducts()
